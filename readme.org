@@ -7,6 +7,55 @@
 #+OPTIONS:   H:4 toc:t num:2
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
+* Rashka25_llm github
+- git@github.com:rasbt/LLMs-from-scratch.git
+
+* ollama
+- installed from https:.//ollama.com
+- ollama run llama3
+  - \bye
+* c07
+** 7.5 Loading a pretrained LLM
+あたりから，結果が変わっていた．
+ただし，rasbtのoriginal dirで実行するとテキスト通り，
+なんか，違う関数をimportしているのかも．
+何度，tuningを繰り返しても途中でnullが出てくる．
+
+File already exists and is up-to-date: gpt2/355M/checkpoint
+File already exists and is up-to-date: gpt2/355M/encoder.json
+File already exists and is up-to-date: gpt2/355M/hparams.json
+model.ckpt.data-00000-of-00001: 100%|██████████| 1.42G/1.42G [03:07<00:00, 7.57MiB/s] 
+model.ckpt.index: 100%|██████████| 10.4k/10.4k [00:00<00:00, 7.11MiB/s]
+model.ckpt.meta: 100%|██████████| 927k/927k [00:01<00:00, 908kiB/s] 
+vocab.bpe: 100%|██████████| 456k/456k [00:00<00:00, 623kiB/s] 
+Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+Convert the active sentence to passive: 'The chef cooks the meal every day.'
+The chef cooks the meal every day.
+
+### Instruction:
+
+Convert the active sentence to passive: 'The chef cooks the
+Training loss: 3.825879430770874
+Validation loss: 3.761904001235962
+
+今は，cpuでやっている．
+前のおかしいのは，mpsだった．
+これは試す価値あり．training遅いけど．
+もし，ここにおかしい点があるなら，issueを立ててやろう．
+
+#+begin_src bash
+Ep 1 (Step 000105): Train loss 0.564, Val loss 0.670
+Ep 1 (Step 000110): Train loss 0.555, Val loss 0.667
+Ep 1 (Step 000115): Train loss 0.508, Val loss 0.664
+Below is an instruction that describes a task. Write a response that appropriately completes the request.  ### Instruction: Convert the active sentence to passive: 'The chef cooks the meal every day.'  ### Response: The meal is prepared every day by the chef.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.  ### Instruction: Convert the active sentence to passive:
+...
+Ep 2 (Step 000225): Train loss 0.346, Val loss 0.661
+Ep 2 (Step 000230): Train loss 0.293, Val loss 0.658
+Below is an instruction that describes a task. Write a response that appropriately completes the request.  ### Instruction: Convert the active sentence to passive: 'The chef cooks the meal every day.'  ### Response: The meal is cooked every day by the chef.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.  ### Instruction: What is the capital of the United Kingdom
+Training completed in 14.16 minutes.
+#+end_src
 * code .での実行
 `code .` で入ると，毎回sourceをしないといけない
 #=> 1.で解決．3.はダメみたい．

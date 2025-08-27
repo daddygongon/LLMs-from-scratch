@@ -1,0 +1,46 @@
+#+OPTIONS: ^:{}
+#+STARTUP: indent nolineimages overview num
+#+TITLE: LLM by Rashka
+#+AUTHOR: Shigeto R. Nishitani
+#+EMAIL:     (concat "shigeto_nishitani@mac.com")
+#+LANGUAGE:  jp
+#+OPTIONS:   H:4 toc:t num:2
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+* code .での実行
+`code .` で入ると，毎回sourceをしないといけない
+#=> 1.で解決．3.はダメみたい．
+
+仮想環境の有効化（source myenv/bin/activate など）は、新しいターミナルごとに必要です。
+これはPythonの仕様で、VS Codeやターミナルを再起動すると仮想環境が自動で有効化されないためです。
+
+省略する方法
+1. VS CodeのPython拡張機能を使う（推奨）
+VS Codeで仮想環境を選択（Cmd+Shift+P → Python: Select Interpreter → myenv を選択）
+これでVS Codeのターミナルを開くと、自動で仮想環境が有効化されます
+2. fishシェルの場合、config.fishに自動有効化を追加
+~/.config/fish/config.fish に以下を追加（プロジェクトディレクトリに入ったときだけ有効化したい場合は工夫が必要です）:
+
+3. direnvを使う（どのシェルでもOK）
+brew install direnv
+プロジェクトディレクトリに .envrc ファイルを作成し、以下を記述:
+初回のみ direnv allow を実行
+これで、そのディレクトリに入るだけで仮想環境が自動で有効化されます。
+
+* 環境構築
+- import tiktoken
+- python3 c2_3_byte_pair_encoding.py
+Traceback (most recent call last):
+  File "/Users/bob/Rashka25_llm/c2_3_byte_pair_encoding.py", line 2, in <module>
+    import tiktoken
+ModuleNotFoundError: No module named 'tiktoken'
+で失敗．仮想環境を作ってinstall, 実行．
+
+** fishでは
+- # 任意のディレクトリで
+- python3 -m venv myenv
+- source myenv/bin/activate.fish
+- pip install tiktoken
+- python3 c2_3_byte_pair_encodin
+g.py 
+tiktoken version: 0.11.0
